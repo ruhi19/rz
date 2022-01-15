@@ -1,0 +1,6 @@
+
+
+Clone project to local and perform (clone, commit, push operation)
+
+nfvdkscjldm
+imrekwlsx
