@@ -16,6 +16,6 @@ for x in range (1,9):
 
 #for author, year, get button
 
-container1=page_soup.findAll("div",{"class":"entry-content group entry-content-vertical"})
-for i in container1.find('aside',attrs={'class': 'post-rail'}):
+container1=page_soup.find("div",{"class":"item selected"})
+for i in container1.findAll('p'):
 	print(i.text)
