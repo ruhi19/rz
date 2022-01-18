@@ -14,11 +14,9 @@ container=page_soup.findAll("ul",{"class":"items"})
 for x in range (9):
 	print(container[x].text)
 
+#for author, year, get button
 
-
-
-
-
-
-    
-
+container1=page_soup.findAll("div",{"class":"entry-content group entry-content-vertical"})
+for p in container1:
+	author_and_year = container1.findAll('p').text
+	print(author_and_year)
