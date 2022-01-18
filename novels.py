@@ -11,18 +11,10 @@ uClient.close()
 
 page_soup=soup(page_html,"html.parser")
 container=page_soup.findAll("ul",{"class":"items"})
-for title in container:
-	name=title.find('li').text
-	print(name)
-	link=title.get('href')
-	print(link)
+for x in range (9):
+	print(container[x].text)
 
-#for author, year, get button
 
-container1=page_soup.findAll("div",{"class":"insert-details"})
-for p in container1:
-	author_and_year = container1.findAll('p').text
-	print(author_and_year)
 
 
 
