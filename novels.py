@@ -11,7 +11,7 @@ uClient.close()
 
 page_soup=soup(page_html,"html.parser")
 container=page_soup.findAll("ul",{"class":"items"})
-for x in range (9):
+for x in range (1,9):
 	print(container[x].text)
 
 #for author, year, get button
