@@ -15,7 +15,7 @@ for x in range (1,9):
 	print(container[x].text)
 
 #for author, year, get button
-
-container1=page_soup.find("div",{"class":"item selected"})
-for i in container1.findAll('p'):
-	print(i.text)
+container1=page_soup.findAll("div",{"item selected"})
+for p in container1:
+	author_and_year = container1.findAll('p').text
+	print(author_and_year)
