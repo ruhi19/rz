@@ -1,11 +1,13 @@
 from selenium import webdriver 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
+import csv
 webD =  webdriver.Chrome("chromedriver.exe")
 webD.get('https://entertainment.time.com/2005/10/16/all-time-100-novels/slide/all/')
 #list of classes containing novels
 class_list = webD.find_elements(By.CLASS_NAME, "items") 
 len_class_list = len(class_list)
+fields = ['Name', 'Details link', 'Author name', 'Year released' , 'Purchase Link']
 for i in range(1,9):
 	novels_details = class_list[i].find_elements(By.TAG_NAME, "li")
 	for novels in novels_details:
@@ -31,3 +33,8 @@ for i in range(1,9):
 		print("Purchase Link:" + novel_purchase_link)
 		webD.close()
 		webD.switch_to.window(webD.window_handles[0])
+		rows = [[novel_name , novel_link , novel_author_name , novel_year_released, novel_purchase_link]]
+		filename = "novels.csv"
+		with open(filename, 'a', newline='') as csvfile: 
+		# creating a csv writer object 
+			csvwriter = csv.writer(csvfile) 
