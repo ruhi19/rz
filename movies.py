@@ -13,3 +13,11 @@ for i in range(5,84):
 			print(title)
 			year = re.split("[()]" , movie_name.text)[1]
 			print(year)
+			movie_link=movies_name.find_element(By.TAG_NAME,"a").get_attribute('href')
+			webD.execute_script("window.open('');")
+
+			# Switch to the new window and open new URL
+			webD.switch_to.window(webD.window_handles[1])
+			webD.get(movie_link)
+			director_name=webD.find_element(By.CLASS_NAME,"infobox-data")
+			print(director_name)
