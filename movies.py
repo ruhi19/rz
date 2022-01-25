@@ -13,7 +13,7 @@ for i in range(5,84):
 			print(title)
 			year = re.split("[()]" , movie_name.text)[1]
 			print(year)
-			movie_link=movies_name.find_element(By.TAG_NAME,"a").get_attribute('href')
+			movie_link=movie_name.find_element(By.TAG_NAME,"a").get_attribute('href')
 			webD.execute_script("window.open('');")
 
 			# Switch to the new window and open new URL
