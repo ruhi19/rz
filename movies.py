@@ -19,8 +19,17 @@ for i in range(5,84):
 			# Switch to the new window and open new URL
 			webD.switch_to.window(webD.window_handles[1])
 			webD.get(movie_link)
-			director_name=webD.find_element(By.CLASS_NAME,"infobox-data")
-			print(director_name)
+			actors_list = webD.find_elements(By.CLASS_NAME, "plainlist")
+			len_actors_list = len(actors_list)
+			for i in range(0,len_actors_list):
+				actor_name_and_link = actors_list[i].find_elements(By.TAG_NAME, "li")
+				for actor in actor_name_and_link:
+					actor_name = actor.text
+					print(actor_name)
+					actor_link = actor.find_element(By.TAG_NAME, "a").get_attribute('href')
+					print(actor_link)
+				
 			webD.close()
 			webD.switch_to.window(webD.window_handles[0])
+
 
