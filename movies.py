@@ -37,7 +37,9 @@ for i in range(5,84):
 							webD.switch_to.window(webD.window_handles[2])
 							webD.get(actor_link)
 							actor_info = webD.find_elements(By.TAG_NAME, "tbody")[0]
-							for actor_details in actor_info:						
+							print(actor_info.text)
+							for actor_details in actor_info:		
+								print(actor_details.text)				
 								date_of_birth = actor_details.find_element(By.CLASS_NAME , "infobox-data")[0]
 								print(date_of_birth.text)
 								years_active = actor_details.find_element(By.CLASS_NAME , "infobox-data")[3]
@@ -52,5 +54,3 @@ for i in range(5,84):
 				print(e)	
 			webD.close()
 			webD.switch_to.window(webD.window_handles[0])
-
-
