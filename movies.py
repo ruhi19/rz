@@ -55,19 +55,19 @@ with open(filename, 'w', newline='') as csvfile:
 									years_active = actor_info.find_elements(By.CLASS_NAME , "infobox-data")[3]
 									print(years_active.text)
 									print("--------------------------------------------------------------------")
-										
+									csvwriter.writerow([title , year , actor_name, date_of_birth.text , years_active.text])
 								except Exception as e:
 									print("actor info not printed")
-
-								csvwriter.writerow([movie_name , year , actor_name, date_of_birth , years_active])
 								webD.close()
 								webD.switch_to.window(webD.window_handles[1])
-								
+
 					except:
 						print("actors list not found")
 					webD.close()
-					webD.switch_to.window(webD.window_handles[0])    
+					webD.switch_to.window(webD.window_handles[0])   
+
 				except Exception as e:
 					print("movie name not found")
+
 				print("======================================================================================")
 				print("error occured", i)
