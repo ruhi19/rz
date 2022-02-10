@@ -5,7 +5,7 @@ import csv
 import re
 webD =  webdriver.Chrome("chromedriver.exe")
 webD.get('https://www.amazon.in/s?bbn=4730577031&rh=n%3A4730577031%2Cp_89%3AGarmin&dc&qid=1619687558&rnid=3837712031&ref=lp_4730577031_nr_p_89_19')	
-for i in range(4,27):
+for i in range(4,5):
 	j=i-3
 	image_link = webD.find_elements(By.CLASS_NAME, "s-image")[j].get_attribute('src')
 	print(image_link)
@@ -17,9 +17,25 @@ for i in range(4,27):
 	# Switch to the new window and open new URL
 	webD.switch_to.window(webD.window_handles[1])
 	webD.get(details_link)
-	product_title = webD.find_element_by_id("productTitle")
+	product_title = webD.find_element(By.ID , "productTitle")
 	print(product_title.text)
-	description = webD.find_element_by_id("feature-bullets")
+	description = webD.find_element(By.ID , "feature-bullets")
 	print(description.text)
+	final_price = webD.find_element(By.CLASS_NAME, "priceToPay")
+	print(final_price.text)
+	actual_price = webD.find_element(By.CLASS_NAME, "basisPrice").text.split(":")[1]
+	print(actual_price)
+	discount = webD.find_element(By.CLASS_NAME, "savingsPercentage")
+	print(discount.text)
+	reviews_link = webD.find_element(By.ID , "reviews-medley-footer").find_element(By.TAG_NAME,"a").get_attribute('href')
+	print(reviews_link)
+
+	# = webD.find_element(By.CLASS_NAME, "imageSwatches")
+	#variations = list_of_variations.find_elements(By.TAG_NAME, "li")
+	#for k in range(0,len(variations)):
+	#	variation_info = variations.find_elements(By.ID , "productOverview_feature_div")
+	#	colour = variation_info.find_element(By.CLASS_NAME, "a-spacing-small")
+	#	print(colour)
+	print("----------------------------------------------------------------------------------------------------------------")
 	webD.close()
 	webD.switch_to.window(webD.window_handles[0])
