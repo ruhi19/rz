@@ -29,13 +29,6 @@ for i in range(3,27):
 	print(discount.text)
 	reviews_link = webD.find_element(By.ID , "reviews-medley-footer").find_element(By.TAG_NAME,"a").get_attribute('href')
 	print(reviews_link)
-
-	# = webD.find_element(By.CLASS_NAME, "imageSwatches")
-	#variations = list_of_variations.find_elements(By.TAG_NAME, "li")
-	#for k in range(0,len(variations)):
-	#	variation_info = variations.find_elements(By.ID , "productOverview_feature_div")
-	#	colour = variation_info.find_element(By.CLASS_NAME, "a-spacing-small")
-	#	print(colour)
 	print("----------------------------------------------------------------------------------------------------------------")
 	webD.close()
 	webD.switch_to.window(webD.window_handles[0])
