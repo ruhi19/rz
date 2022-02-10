@@ -5,7 +5,7 @@ import csv
 import re
 webD =  webdriver.Chrome("chromedriver.exe")
 webD.get('https://www.amazon.in/s?bbn=4730577031&rh=n%3A4730577031%2Cp_89%3AGarmin&dc&qid=1619687558&rnid=3837712031&ref=lp_4730577031_nr_p_89_19')	
-for i in range(4,5):
+for i in range(3,27):
 	j=i-3
 	image_link = webD.find_elements(By.CLASS_NAME, "s-image")[j].get_attribute('src')
 	print(image_link)
