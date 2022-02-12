@@ -13,7 +13,8 @@ print(no_of_pages)
 for k in range(0,no_of_pages):
 	try:
 		pages = webD.find_element(By.CLASS_NAME , "s-pagination-next")
-		for i in range(4,5):			
+		no_of_elements = len(webD.find_elements(By.CLASS_NAME, "sg-col-inner"))
+		for i in range(4,no_of_elements-2):			
 			print(i)
 			try:
 				j=i-3
@@ -89,8 +90,9 @@ for k in range(0,no_of_pages):
 			print("----------------------------------------------------------------------------------------------------------------")
 			webD.close()
 			webD.switch_to.window(webD.window_handles[0])
-			pages.click()
-			time.sleep(2)
+		pages.click()
+		time.sleep(2)
 	except:
 		pages=webD.find_element(By.CLASS_NAME,"s-pagination-disabled")
 		print("This is the last page")
+
