@@ -7,7 +7,7 @@ import time
 webD =  webdriver.Chrome("chromedriver.exe")
 url = 'https://www.amazon.in/s?i=sporting&bbn=4730577031&rh=n%3A4730577031%2Cp_89%3AGarmin&dc&qid=1644590353&rnid=3837712031&ref=sr_pg_1'
 webD.get(url)
-fields=['Image Link','Details Link','Product Title','Description','Reviews Link','Actual Rating','Total Rating','Colour Name','Final Price','Actual Price','Discount']	
+fields=['Image Link','Details Link','Product Title','Description','Reviews Link','Actual Rating','Total Rating','Variation']	
 filename="garmin.csv"
 with open(filename,'w',newline='') as csvfile:
 	csvwriter=csv.writer(csvfile)
@@ -69,6 +69,7 @@ with open(filename,'w',newline='') as csvfile:
 							except:
 								continue
 							print(discount.text)
+						csvwriter.writerow([image_link , details_link , product_title.text , description.text , actual_rating.text , total_rating.text ,{ 'brand':'garmin', 'colour_name' : colour_name, 'final_price' : final_price , 'actual_price' : actual_price , 'discount' : discount} ])		
 					except:
 						print("Only one colour present")
 						colour_div = webD.find_element(By.ID , "productOverview_feature_div").find_element(By.TAG_NAME, "table")
@@ -82,14 +83,14 @@ with open(filename,'w',newline='') as csvfile:
 						price_div = price_div.find_elements(By.CLASS_NAME, "a-price")
 						final_price = price_div[0].text.split("\n")[0]
 						print(final_price)			
-						actual_price = price_div[1]
-						print(actual_price.text)
+						actual_price = price_div[1].text
+						print(actual_price)
 						try:
 							discount = webD.find_element(By.CLASS_NAME, "savingsPercentage")
 						except:
 							continue
 						print(discount.text)
-						csvwriter.writerow([image_link , details_link , product_title , description , actual_rating , total_rating , colour_name , final_price , actual_price , discount ])
+					
 				except:
 					print("")
 				print("----------------------------------------------------------------------------------------------------------------")
