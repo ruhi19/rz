@@ -18,7 +18,7 @@ with open(filename,'w',newline='') as csvfile:
 		try:
 			pages = webD.find_element(By.CLASS_NAME , "s-pagination-next")
 			no_of_elements = len(webD.find_elements(By.CLASS_NAME, "sg-col-inner"))
-			for i in range(4,5):			
+			for i in range(4, no_of_elements):			
 				print(i)
 				try:
 					j=i-3
