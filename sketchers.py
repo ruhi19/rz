@@ -40,6 +40,14 @@ for k in range(0,no_of_pages):
 				print(actual_rating.text)
 				total_rating = webD.find_element(By.CLASS_NAME, "AverageCustomerReviews")
 				print(total_rating.text)
+				try:
+					variations_div= webD.find_element(By.CLASS_NAME, "imageSwatches")
+					colour_variations = variations_div.find_elements(By.TAG_NAME, "li")
+					for colour in colour_variations:
+						colour.click()
+						time.sleep(2)
+				except:
+					print("There are no variations in colour")        
 			except:
 				print("")
 			print("----------------------------------------------------------------------------------------------------------------")
