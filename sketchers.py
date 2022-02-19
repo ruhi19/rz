@@ -13,7 +13,7 @@ for k in range(0,no_of_pages):
 	try:
 		pages = webD.find_element(By.CLASS_NAME , "s-pagination-next")
 		no_of_elements = len(webD.find_elements(By.CLASS_NAME, "sg-col-inner"))
-		for i in range(3,no_of_elements):			
+		for i in range(3,no_of_elements-2):			
 			print(i)
 			try:
 				j=i-3
