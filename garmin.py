@@ -17,7 +17,7 @@ with open(filename, 'w', newline='', encoding="utf-8") as csvfile:
 		try:
 			pages = webD.find_element(By.CLASS_NAME, "s-pagination-next")
 			no_of_elements = len(webD.find_elements(By.CLASS_NAME, "sg-col-inner"))
-			for i in range(5, no_of_elements):
+			for i in range(3, no_of_elements):
 				print(i)
 				try:
 					j = i-3
@@ -32,9 +32,6 @@ with open(filename, 'w', newline='', encoding="utf-8") as csvfile:
 					page_data.find_element(By.TAG_NAME,"a").click()
 					webD.switch_to.window(webD.window_handles[1])
 					webD.get(details_link)
-					for k in range(3,7):
-						image_link1 = webD.find_elements(By.CLASS_NAME, "a-dynamic-image")[k].get_attribute('src')
-						print(image_link)
 					product_title = webD.find_element(By.ID , "productTitle").text
 					print(product_title)
 					description = webD.find_element(By.ID , "feature-bullets").text
@@ -70,6 +67,9 @@ with open(filename, 'w', newline='', encoding="utf-8") as csvfile:
 						for colour in colour_variations:
 							colour.click()
 							time.sleep(2)
+							for m in range(3,7):
+								image_link1 = webD.find_elements(By.CLASS_NAME, "a-dynamic-image")[m].get_attribute('src')
+								print(image_link1)
 							colour_name = ""
 							try:
 								colour_div = webD.find_element(By.ID , "productOverview_feature_div").find_element(By.TAG_NAME, "table")
@@ -106,6 +106,10 @@ with open(filename, 'w', newline='', encoding="utf-8") as csvfile:
 						try:
 							colour_div = webD.find_element(By.ID , "productOverview_feature_div").find_element(By.TAG_NAME, "table")
 							colour_div = colour_div.find_elements(By.TAG_NAME , "tr")
+							images2 = webD.find_element(By.CLASS_NAME, "regularAltImageViewLayout")
+							for l in range(3,7):
+								image_link2 = webD.find_elements(By.CLASS_NAME, "a-dynamic-image")[l].get_attribute('src')
+								print(image_link2)
 							for c_div in colour_div:
 								tag_name = c_div.find_elements(By.TAG_NAME, "td")[0].text
 								if tag_name == "Colour":
