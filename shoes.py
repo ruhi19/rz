@@ -8,12 +8,8 @@ url = 'https://www.amazon.in/s?i=shoes&bbn=1983550031&rh=n%3A1983550031%2Cp_89%3
 webD =  webdriver.Chrome("chromedriver.exe")
 webD.get(url)
 
-no_of_pages = len(webD.find_elements(By.CLASS_NAME, "s-pagination-item"))-2
-if no_of_pages == -2:
-	print("only one page present")
-	no_of_pages = 1
 colours_list = webD.find_elements(By.CLASS_NAME , "s-navigation-item")
-for i in range(78,90):
+for i in range(77,90):
 	colour_link = colours_list[i].get_attribute('href')
 	print(colour_link)
 	# Open a new window
@@ -21,13 +17,15 @@ for i in range(78,90):
 	# Switch to the new window and open new URL
 	webD.switch_to.window(webD.window_handles[1])
 	webD.get(colour_link)
-	no_of_pages=len(webD.find_elements(By.CLASS_NAME,"s-pagination-item"))-2
-	print(no_of_pages)
+	no_of_pages = len(webD.find_elements(By.CLASS_NAME, "s-pagination-item"))-2
+	if (no_of_pages == -2):
+		print("only one page present")
+		no_of_pages = 1
 	for k in range(0,no_of_pages):
 		try:
 			pages = webD.find_element(By.CLASS_NAME , "s-pagination-next")
 			no_of_elements = len(webD.find_elements(By.CLASS_NAME, "sg-col-inner"))
-			for i in range(3,4):			
+			for i in range(3,5):			
 				print(i)
 				try:
 					j=i-3
