@@ -12,12 +12,8 @@ filename = "sketchers.csv"
 with open(filename, 'w', newline='', encoding="utf-8") as csvfile:
 	csvwriter = csv.writer(csvfile)
 	csvwriter.writerow(fields)
-	no_of_pages = len(webD.find_elements(By.CLASS_NAME, "s-pagination-item"))-2
-	if no_of_pages == -2:
-		print("only one page present")
-		no_of_pages = 1
 	colours_list = webD.find_elements(By.CLASS_NAME , "s-navigation-item")
-	for i in range(78,90):
+	for i in range(77,90):
 		colour_link = colours_list[i].get_attribute('href')
 		print(colour_link)
 		# Open a new window
@@ -25,13 +21,15 @@ with open(filename, 'w', newline='', encoding="utf-8") as csvfile:
 		# Switch to the new window and open new URL
 		webD.switch_to.window(webD.window_handles[1])
 		webD.get(colour_link)
-		no_of_pages=len(webD.find_elements(By.CLASS_NAME,"s-pagination-item"))-2
-		print(no_of_pages)
+		no_of_pages = len(webD.find_elements(By.CLASS_NAME, "s-pagination-item"))-2
+		if (no_of_pages == -2):
+			print("only one page present")
+			no_of_pages = 1
 		for k in range(0,no_of_pages):
 			try:
 				pages = webD.find_element(By.CLASS_NAME , "s-pagination-next")
 				no_of_elements = len(webD.find_elements(By.CLASS_NAME, "sg-col-inner"))
-				for i in range(3,4):			
+				for i in range(3,5):			
 					print(i)
 					try:
 						j=i-3
@@ -58,16 +56,15 @@ with open(filename, 'w', newline='', encoding="utf-8") as csvfile:
 						print(actual_rating)
 						total_rating = webD.find_element(By.CLASS_NAME, "AverageCustomerReviews").text
 						print(total_rating)
-						# print(total_ratings.text)
 						ratings = {
-								   "actual_rating": total_ratings.text,
-								   "total_ratings": actual_rating.text,
-								   "total_reviews": actual_rating.text
+								   "actual_rating": total_ratings,
+								   "total_ratings": actual_rating,
+								   "total_reviews": actual_rating
 								  }
 						try:
-							variation_details = []
 							variations_div= webD.find_element(By.CLASS_NAME, "imageSwatches")
 							colour_variations = variations_div.find_elements(By.TAG_NAME, "li")
+							variation_details = []
 							for colour in colour_variations:
 								colour.click()
 								time.sleep(2)
@@ -97,7 +94,6 @@ with open(filename, 'w', newline='', encoding="utf-8") as csvfile:
 											print(discount)
 										except:
 											discount = 0
-										variation_details.append({'actual_price': actual_price, 'final_price': final_price, 'discount': discount, 'images': images, 'available': "In Stock"})
 										time.sleep(2)
 								except:
 									print("no size variations")
@@ -121,10 +117,10 @@ with open(filename, 'w', newline='', encoding="utf-8") as csvfile:
 									except:
 										discount = 0
 										print(discount)
-									variation_details.append({'actual_price': actual_price, 'final_price': final_price, 'discount': discount, 'images': image_link,'available': 'In Stock'})
+									variation_details.append({'brand': brnd_name, 'colour': colour_name, 'actual_price': actual_price, 'final_price': final_price, 'discount': discount, 'images': images,'available': 'In Stock'})
 						except:
 							print("There are no variations in colour")  
-							variation_details =[]
+							variation_details = []
 							try:
 								size_div = webD.find_element(By.ID, "native_dropdown_selected_size_name")
 								size_options = size_div.find_elements(By.CLASS_NAME, "dropdownAvailable")
@@ -150,8 +146,9 @@ with open(filename, 'w', newline='', encoding="utf-8") as csvfile:
 										print(discount)
 									except:
 										discount = 0
+									variation_details.append({'brand': brnd_name, 'colour': colour_name, 'actual_price': actual_price, 'final_price': final_price, 'discount': discount, 'images': images,'available': 'In Stock'})
+									
 									time.sleep(2) 
-									variation_details.append({'actual_price': actual_price, 'final_price': final_price, 'discount': discount, 'images': image_link,'available': 'In Stock'})
 							except:
 								print("no size variations")
 								actual_price = final_price = 0
@@ -174,11 +171,11 @@ with open(filename, 'w', newline='', encoding="utf-8") as csvfile:
 								except:
 									discount = 0
 									print(discount)
-								variation_details.append({'actual_price': actual_price, 'final_price': final_price, 'discount': discount, 'images': image_link,'available': 'In Stock'})										
+								variation_details.append({'brand': brnd_name, 'colour': colour_name, 'actual_price': actual_price, 'final_price': final_price, 'discount': discount, 'images': images,'available': 'In Stock'})
+						csvwriter.writerow([product_title, ratings, reviews_link, description, variation_details, image_link, details_link, time.time()])		
 					except:
 						print("")
 					print("----------------------------------------------------------------------------------------------------------------")				
-					csvwriter.writerow([product_title, reviews_link, description, variation_details, image_link, details_link, time.time()])
 				webD.close()
 				webD.switch_to.window(webD.window_handles[1])
 				pages.click()
